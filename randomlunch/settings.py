@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'backend.apps.BackendConfig',
-    'corsheaders'
+    'corsheaders',
+    'decouple'
 ]
 
 MIDDLEWARE = [
@@ -83,8 +85,12 @@ WSGI_APPLICATION = 'randomlunch.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': config('X_DB_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': config('X_DB_NAME', 'db.sqlite3'),
+        'USER': config('X_DB_USERNAME', ''),
+        'PASSWORD': config('X_DB_PASSWORD', ''),
+        'HOST': config('X_DB_HOST', ''),
+        'PORT': config('X_DB_PORT', '')
     }
 }
 
@@ -127,5 +133,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, os.path.pardir, 'frontend', 'src', 'assets', 'static')
-MEDIA_ROOT = os.path.join(BASE_DIR, os.path.pardir, 'frontend', 'src', 'assets', 'media')
+# STATIC_ROOT = os.path.join(BASE_DIR, os.path.pardir, 'frontend', 'src', 'assets', 'static')
+# MEDIA_ROOT = os.path.join(BASE_DIR, os.path.pardir, 'frontend', 'src', 'assets', 'media')
