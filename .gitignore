@@ -1,7 +1,5 @@
 .idea/
-db.sqlite3
 backend/migrations/
-.env
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
