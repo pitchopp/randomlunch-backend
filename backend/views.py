@@ -10,7 +10,10 @@ from randomlunch.randomsession import get_random_couples
 def persons(request):
     try:
         if request.method == 'GET':
-            return JsonResponse(PersonSerializer(Person.objects.all(), many=True).data, safe=False)
+            response = JsonResponse(PersonSerializer(Person.objects.all(), many=True).data, safe=False)
+            response["Access-Control-Allow-Origin"] = "*"
+            response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
+            return response
         else:
             return ErrorResponses.method_not_allowed(request)
     except Exception as e:
