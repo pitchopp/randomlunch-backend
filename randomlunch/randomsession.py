@@ -107,6 +107,6 @@ def get_random_couples(list_persons):
                 teammate = random_neighbor
                 break
             else:
-                neighbors.remove(teammate)
+                neighbors.remove(random_neighbor)
         graph.remove_node(teammate)
         yield teammate, weakest
