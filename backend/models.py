@@ -38,6 +38,9 @@ def get_image_path(instance, filename):
 class Client(Model):
     name = CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
+
 
 class Person(Model):
     profile_picture = ImageField(upload_to=get_image_path, blank=True, null=True)
