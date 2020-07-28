@@ -110,4 +110,4 @@ def get_random_couples(list_persons):
                 neighbors.remove(random_neighbor)
         if teammate is not None:
             graph.remove_node(teammate)
-        yield teammate, weakest
+            yield teammate, weakest
