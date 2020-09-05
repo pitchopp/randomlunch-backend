@@ -52,6 +52,7 @@ class Person(Model):
     mission = CharField(max_length=50, null=True, blank=True)
     phone_number = CharField(max_length=15, null=True, blank=True)
     can_move = BooleanField(default=False)
+    active = BooleanField(default=True)
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
@@ -83,3 +84,15 @@ class Couple(Model):
     person_1 = ForeignKey(Person, on_delete=CASCADE, related_name='+')
     person_2 = ForeignKey(Person, on_delete=CASCADE, related_name='+')
     session = ForeignKey(Session, on_delete=CASCADE, related_name='couples')
+
+
+class PossibleSession(Model):
+    @classmethod
+    def get_random(cls) -> "PossibleSession":
+        return cls.objects.order_by('?').first()
+
+
+class PossibleCouple(Model):
+    person_1 = ForeignKey(Person, on_delete=CASCADE, related_name='+')
+    person_2 = ForeignKey(Person, on_delete=CASCADE, related_name='+')
+    session = ForeignKey(PossibleSession, on_delete=CASCADE, related_name='couples')

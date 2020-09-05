@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'backend.apps.BackendConfig',
     'corsheaders',
-    'decouple'
+    'decouple',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -57,6 +58,19 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = (
+   'accept',
+   'accept-encoding',
+   'authorization',
+   'content-type',
+   'dnt',
+   'origin',
+   'user-agent',
+   'x-csrftoken',
+   'x-requested-with',
+    'app-key',
+)
 
 ROOT_URLCONF = 'randomlunch.urls'
 
