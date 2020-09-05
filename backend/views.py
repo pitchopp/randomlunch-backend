@@ -33,23 +33,23 @@ def sessions(request):
 
 @api_view(['POST'])
 def random_session(request):
-    try:
-        if request.method == 'POST':
-            session = Session()
-            session.save()
-            rand_sess = PossibleSession.get_random()
-            for couple in rand_sess.couples:
-                Couple(
-                    session=session,
-                    person_1=couple.person_1,
-                    person_2=couple.person_2
-                ).save()
-            time.sleep(4)
-            return JsonResponse(SessionSerializer(session).data, safe=False)
-        else:
-            return ErrorResponses.method_not_allowed(request)
-    except Exception as e:
-       return ErrorResponses.error_500(str(e))
+    # try:
+    if request.method == 'POST':
+        session = Session()
+        session.save()
+        rand_sess = PossibleSession.get_random()
+        for couple in rand_sess.couples.all():
+            Couple(
+                session=session,
+                person_1=couple.person_1,
+                person_2=couple.person_2
+            ).save()
+        time.sleep(4)
+        return JsonResponse(SessionSerializer(session).data, safe=False)
+    else:
+        return ErrorResponses.method_not_allowed(request)
+    # except Exception as e:
+    #    return ErrorResponses.error_500(str(e))
 
 
 @api_view(['PUT'])
