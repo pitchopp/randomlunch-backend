@@ -71,7 +71,7 @@ class Person(Model):
         if list_persons:
             pool = list_persons
         else:
-            pool = self.objects.all()
+            pool = Person.objects.all()
         return [p for p in pool if p != self and self.can_meet(p)]
 
 
