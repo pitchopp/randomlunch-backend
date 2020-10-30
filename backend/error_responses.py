@@ -4,7 +4,7 @@ from rest_framework import status
 
 class ErrorResponses:
     @staticmethod
-    def error_500(e: str = None) -> JsonResponse:
+    def error_500(e) -> JsonResponse:
         return JsonResponse({"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     @staticmethod

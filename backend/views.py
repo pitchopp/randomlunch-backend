@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 
 from backend.error_responses import ErrorResponses
 from backend.models import Person, Session, Couple, PossibleSession
+from backend.scripts import generate_possible_sessions
 from backend.serializers import PersonSerializer, SessionSerializer
 from randomlunch.randomsession import get_random_couples
 
@@ -76,3 +77,12 @@ def sessions(request):
             return ErrorResponses.method_not_allowed(request)
     except Exception as e:
         return ErrorResponses.error_500(str(e))
+
+
+@api_view(['POST'])
+def update_sessions(request):
+    try:
+        generate_possible_sessions.run()
+    except Exception as e:
+        return ErrorResponses.error_500(e)
+    return JsonResponse({"status": "OK"})
